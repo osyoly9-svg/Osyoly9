@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Nova | Modern Creative Studio</title>
+  <!-- Google Fonts + simple reset & smooth behavior -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafcff;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      color: #111827;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #eef2f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 12px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #2563eb, #7c3aed, #db2777);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+      background: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .btn-primary:hover {
+      background: #1f2937;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px -12px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      border: 1px solid #cbd5e1;
+      background: white;
+      color: #1f2937;
+    }
+    .btn-outline:hover {
+      border-color: #2563eb;
+      background: #f0f9ff;
+      transform: translateY(-2px);
+    }
+
+    /* Header / Nav */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #1e293b, #2563eb);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #334155;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    /* Hero section */
+    .hero {
+      padding: 80px 0 100px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #2563eb;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 3.8rem;
+      line-height: 1.2;
+      max-width: 900px;
+      margin: 0 auto 24px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #4b5563;
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Features grid */
+    .section {
+      padding: 80px 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header h2 {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+    .section-header p {
+      font-size: 1.1rem;
+      color: #4b5563;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 32px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+      border: 1px solid #eef2ff;
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 30px 45px -16px rgba(0,0,0,0.12);
+      border-color: #cbdffc;
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      background: #eef2ff;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 28px;
+      margin-bottom: 24px;
+    }
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+    .feature-card p {
+      color: #4b5563;
+    }
+
+    /* Stats row */
+    .stats {
+      background: linear-gradient(110deg, #f8fafc, #ffffff);
+      border-radius: 64px;
+      margin: 40px 0;
+      padding: 48px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 32px;
+      text-align: center;
+      border: 1px solid #eef2ff;
+    }
+    .stat-item h4 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .stat-item p {
+      color: #475569;
+      font-weight: 500;
+    }
+
+    /* Testimonials */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    .testimonial-card {
+      background: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+      border: 1px solid #eef2ff;
+    }
+    .testimonial-text {
+      font-size: 1rem;
+      color: #1e293b;
+      margin-bottom: 24px;
+      font-style: normal;
+      line-height: 1.5;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(145deg, #2563eb, #7c3aed);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .author-info strong {
+      display: block;
+      font-weight: 600;
+    }
+    .author-info span {
+      font-size: 0.85rem;
+      color: #5b6e8c;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: #0f172a;
+      border-radius: 64px;
+      padding: 80px 48px;
+      text-align: center;
+      color: white;
+      margin: 40px 0 80px;
+    }
+    .cta-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    .cta-section p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+    .btn-cta {
+      background: white;
+      color: #0f172a;
+      border: none;
+      padding: 14px 36px;
+      font-weight: 600;
+    }
+    .btn-cta:hover {
+      background: #e2e8f0;
+      transform: scale(1.02);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 48px 0 32px;
+      margin-top: 32px;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: #475569;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: #2563eb;
+    }
+    .copyright {
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .navbar {
+        flex-direction: column;
+      }
+      .nav-links {
+        gap: 24px;
+      }
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
+      .stats {
+        flex-direction: column;
+        align-items: center;
+        border-radius: 48px;
+      }
+      .cta-section {
+        padding: 48px 24px;
+      }
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="logo">✦ Nova</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Work</a>
+        <a href="#">Community</a>
+        <a href="#" class="btn-outline" style="padding: 8px 20px;">Sign In</a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">✨ AI-driven creative studio since 2025</div>
+      <h1>Design the future with <span class="gradient-text">intelligent flow</span></h1>
+      <p>Nova combines stunning design, fast performance, and modern web experiences — built for founders, creators, and dreamers.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" id="exploreBtn">Explore now →</button>
+        <button class="btn btn-outline" id="demoBtn">See live demo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <div class="container">
+    <div class="section">
+      <div class="section-header">
+        <h2>Everything you need to <span class="gradient-text">succeed</span></h2>
+        <p>Powerful tools, elegant interface, and seamless integrations.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Lightning fast</h3>
+          <p>Optimized performance with instant loading and smooth interactions. Your users will love the speed.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Pixel perfect</h3>
+          <p>Crafted with attention to every detail — modern components and fluid responsiveness across all devices.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Secure by design</h3>
+          <p>Enterprise-grade security, privacy-first analytics, and robust infrastructure out of the box.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>AI integration</h3>
+          <p>Smart automations and generative features to boost your workflow and creativity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="stats">
+      <div class="stat-item">
+        <h4>10k+</h4>
+        <p>Active creators</p>
+      </div>
+      <div class="stat-item">
+        <h4>98%</h4>
+        <p>Satisfaction rate</p>
+      </div>
+      <div class="stat-item">
+        <h4>24/7</h4>
+        <p>Global support</p>
+      </div>
+      <div class="stat-item">
+        <h4>120+</h4>
+        <p>Countries served</p>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Trusted by <span class="gradient-text">innovators</span></h2>
+        <p>See what our community says about working with Nova.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-text">“Nova completely transformed our online presence. The speed and design flexibility are unmatched. We grew engagement by 200% in just 3 months.”</div>
+          <div class="testimonial-author">
+            <div class="avatar">JD</div>
+            <div class="author-info">
+              <strong>Jamie Dawson</strong>
+              <span>Creative Director, Loomly</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-text">“The AI-powered suggestions and modern UI kit saved us weeks of development. Absolutely brilliant for startups looking to scale.”</div>
+          <div class="testimonial-author">
+            <div class="avatar">MP</div>
+            <div class="author-info">
+              <strong>Maya Patel</strong>
+              <span>Founder, Aurora Tech</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-text">“I’ve tried many platforms, but Nova stands out. Clean code, stunning components, and their support team is super responsive.”</div>
+          <div class="testimonial-author">
+            <div class="avatar">CR</div>
+            <div class="author-info">
+              <strong>Chris Romero</strong>
+              <span>Product Lead, Stellar Studio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+      <h2>Ready to elevate your brand? 🚀</h2>
+      <p>Join thousands of creators who use Nova to build exceptional digital experiences.</p>
+      <button class="btn btn-cta" id="ctaButton">Start free trial →</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="logo" style="font-size: 1.5rem;">✦ Nova Studio</div>
+        <div class="footer-links">
+          <a href="#">About</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Legal</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="copyright">© 2025 Nova — All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- simple interactive toast / demo alert with smooth ux -->
+  <script>
+    (function() {
+      // Create a small notification system
+      function showMessage(msg, type = 'info') {
+        // remove existing toast if any
+        const existingToast = document.querySelector('.custom-toast');
+        if(existingToast) existingToast.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'custom-toast';
+        toast.textContent = msg;
+        // style for toast
+        toast.style.position = 'fixed';
+        toast.style.bottom = '28px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.backgroundColor = type === 'error' ? '#b91c1c' : '#0f172a';
+        toast.style.color = 'white';
+        toast.style.padding = '12px 24px';
+        toast.style.borderRadius = '60px';
+        toast.style.fontWeight = '500';
+        toast.style.fontSize = '0.9rem';
+        toast.style.boxShadow = '0 12px 24px rgba(0,0,0,0.2)';
+        toast.style.zIndex = '9999';
+        toast.style.backdropFilter = 'blur(4px)';
+        toast.style.backgroundColor = type === 'error' ? '#be123c' : '#111827';
+        toast.style.border = '1px solid rgba(255,255,255,0.15)';
+        toast.style.fontFamily = "'Inter', sans-serif";
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+          if(toast && toast.remove) toast.remove();
+        }, 2800);
+      }
+
+      // Interactive hero buttons
+      const exploreBtn = document.getElementById('exploreBtn');
+      const demoBtn = document.getElementById('demoBtn');
+      const ctaButton = document.getElementById('ctaButton');
+
+      if(exploreBtn) {
+        exploreBtn.addEventListener('click', () => {
+          showMessage('✨ Explore the future — discover all Nova features.', 'info');
+          // subtle scroll to features
+          const featuresSection = document.querySelector('.features-grid');
+          if(featuresSection) {
+            featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+
+      if(demoBtn) {
+        demoBtn.addEventListener('click', () => {
+          showMessage('🎥 Live demo ready! Request a personalized walkthrough.', 'info');
+        });
+      }
+
+      if(ctaButton) {
+        ctaButton.addEventListener('click', () => {
+          showMessage('🎉 Thanks for your interest! Get started — check your inbox (demo account ready).', 'info');
+        });
+      }
+
+      // Add hover-like micro interactions for stat items (just for fun)
+      const statItems = document.querySelectorAll('.stat-item');
+      statItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const numberElem = item.querySelector('h4');
+          if(numberElem) {
+            const statValue = numberElem.innerText;
+            showMessage(`📊 ${statValue} amazing achievements and counting!`, 'info');
+          }
+        });
+        item.style.cursor = 'pointer';
+      });
+
+      // testimonials: subtle alert to show which testimonial you clicked
+      const testimonialCards = document.querySelectorAll('.testimonial-card');
+      testimonialCards.forEach((card, idx) => {
+        card.addEventListener('click', () => {
+          const authorName = card.querySelector('.author-info strong')?.innerText || 'a creator';
+          showMessage(`💬 "${authorName}" shared an inspiring story — join Nova today!`, 'info');
+        });
+        card.style.cursor = 'pointer';
+      });
+
+      // feature card interactions: show friendly tooltip-like
+      const featureCards = document.querySelectorAll('.feature-card');
+      featureCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          const title = card.querySelector('h3')?.innerText || 'feature';
+          showMessage(`✨ ${title}: advanced tools are just a click away.`, 'info');
+        });
+      });
+
+      // Nav links dynamic but soft behavior (prevent real anchor jumps)
+      const navLinks = document.querySelectorAll('.nav-links a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const linkText = link.innerText;
+          if(linkText === 'Sign In') {
+            showMessage('🔐 Sign in panel — secure login for your Nova account.', 'info');
+          } else {
+            showMessage(`🌐 ${linkText} section — coming soon with more exciting updates.`, 'info');
+          }
+        });
+      });
+
+      // add some extra smoothness with a small console greeting
+      console.log('🚀 Nova website is live — crafted for creativity & speed');
+    })();
+  </script>
+
+  <!-- extra style for focus states and subtle animations -->
+  <style>
+    button, .btn, .feature-card, .testimonial-card, .stat-item {
+      transition: all 0.2s ease;
+    }
+    .btn-primary:focus-visible, .btn-outline:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(12px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    .hero, .features-grid, .stats, .testimonial-grid, .cta-section {
+      animation: fadeUp 0.6s ease-out forwards;
+    }
+    .stats {
+      animation-delay: 0.05s;
+    }
+    .testimonial-grid {
+      animation-delay: 0.1s;
+    }
+    .cta-section {
+      animation-delay: 0.15s;
+    }
+  </style>
+</body>
+</html>
